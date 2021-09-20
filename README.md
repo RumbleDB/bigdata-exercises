@@ -49,3 +49,40 @@ Accessing the host folder that is mounted into the containers may not immediatel
    ```bash
    ./deactivate-docker-env.sh
    ```
+
+### Working behind ETH's Proxy
+
+If you are working within the ETH network (i.e., from within ETH's wifi, from one of the pool computers, or via VPN), you need to configure Docker in two places to work with that proxy. Below is a description how (adapted from [the official documentation](https://docs.docker.com/network/proxy/)).
+
+#### Docker Client
+
+Edit `~/.docker/config.json` and make sure the proxy is configured like this:
+
+```JSON
+{
+ "proxies":
+ {
+   "default":
+   {
+     "httpProxy": "http://proxy.ethz.ch:3128",
+     "httpsProxy": "http://proxy.ethz.ch:3128"
+   }
+ }
+}
+```
+
+#### Docker Engine
+
+Inside the Docker containers (which are started by Docker Compose), the environment variables `http(s)_proxy` both upper and lower case should be set to `http://proxy.ethz.ch:3128`. There are a number of ways to achieve this:
+
+* Modify the `.env` file in each `exerciseXX` directory or the one in the root directory if this repository and add the following lines:
+   ```bash
+   HTTPS_PROXY=http://proxy.ethz.ch:3128
+   HTTP_PROXY=http://proxy.ethz.ch:3128
+   FTP_PROXY=http://proxy.ethz.ch:3128
+   https_proxy=http://proxy.ethz.ch:3128
+   http_proxy=http://proxy.ethz.ch:3128
+   ftp_proxy=http://proxy.ethz.ch:3128
+   ```
+* If you know your system is using systemd (which is the default in Ubuntu), try out [this method](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy) to configure these variables permanently.
+* If you know your system is using SysV (e.g., some older Ubuntu/Debian versions), try out [this method](https://stackoverflow.com/a/38386911/651937)

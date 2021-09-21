@@ -86,3 +86,19 @@ Inside the Docker containers (which are started by Docker Compose), the environm
    ```
 * If you know your system is using systemd (which is the default in Ubuntu), try out [this method](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy) to configure these variables permanently.
 * If you know your system is using SysV (e.g., some older Ubuntu/Debian versions), try out [this method](https://stackoverflow.com/a/38386911/651937)
+
+### SSH Tunnel
+
+You may want to run Docker Compose on some computer (maybe from the ETH pool) but use a browser on another one (maybe your laptop at home). This is possible with SSH tunneling.
+
+With that approach, there are two to three computers involved: (1) your machine (with the browser), (2) a *jump host*, and (3) the target machine (where Docker Compose runs). It may be that (2) and (3) are the same computer. For this to work, you will need an SSH client on your machine (1), you need to be able to SSH from your machine (1) to the jump host (2), the jump host (2) needs to be able to reach the target machine (3) over the network, and Docker Compose needs to be installed as described above on the target machine (3).
+
+Once everything is installed, do the following to establish the tunnel:
+
+```bash
+ssh -L $LOCAL_PORT:$TARGET_MACHINE_DNSNAME:$TARGET_PORT -p $SSH_PORT $SSH_USER@$JUMPHOST_DNSNAME
+ ```
+
+For the notebook server, `TARGET_PORT=8888`. You typically set `LOCAL_PORT` to the same value or to `80`, in which case you can omit the port from the URL in your local browser. `SSH_PORT` is 22 by default; `SSH_USER` is probably your NETHZ ID if the target machine (3) is managed by ETH. If the target machine (3) is the same machine as the jump host (2), then `TARGET_MACHINE_DNSNAME=localhost`.
+
+If a `docker-compose.yml` exposes more than one service with a web server, you can repeat the `-L $LOCAL_PORT:$TARGET_MACHINE_DNSNAME:$TARGET_PORT` with different values of `LOCAL_PORT` and `TARGET_PORT`.

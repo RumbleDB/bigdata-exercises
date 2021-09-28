@@ -97,7 +97,7 @@ Once everything is installed, do the following to establish the tunnel:
 
 ```bash
 ssh -L $LOCAL_PORT:$TARGET_MACHINE_DNSNAME:$TARGET_PORT -p $SSH_PORT $SSH_USER@$JUMPHOST_DNSNAME
- ```
+```
 
 For the notebook server, `TARGET_PORT=8888`. You typically set `LOCAL_PORT` to the same value or to `80`, in which case you can omit the port from the URL in your local browser. `SSH_PORT` is 22 by default; `SSH_USER` is probably your NETHZ ID if the target machine (3) is managed by ETH. If the target machine (3) is the same machine as the jump host (2), then `TARGET_MACHINE_DNSNAME=localhost`.
 

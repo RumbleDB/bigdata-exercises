@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+
+  postgres:
+    build:
+      context: ./docker/postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: tpch-db
+      POSTGRES_PASSWORD: bigdataclass
+    volumes:
+      - ./docker/postgres/tpch/schema.sql:/docker-entrypoint-initdb.d/1_schema.sql:ro
+      - ./:/host:ro
+
+  jupyter:
+    build:
+      context: ./docker/jupyter
+    restart: always
+    ports:
+      - 8888:8888
+    user: root
+    environment:
+      - NB_UID=$HOST_UID
+      - NB_GID=$HOST_GID
+    volumes:
+      - ./:/home/jovyan/work
+    command: ["start.sh", "jupyter", "lab", "--NotebookApp.token=''"]

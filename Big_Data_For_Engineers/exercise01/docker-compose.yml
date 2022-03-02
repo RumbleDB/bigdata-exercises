@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+
+  postgres:
+    build:
+      context: ./docker/postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: BigData1
+    volumes:
+      - ./docker/postgres/postgres-init.sh:/docker-entrypoint-initdb.d/init-user-db.sh:ro
+      - ./:/host:ro
+
+  jupyter:
+    build:
+      context: ./docker/jupyter
+    restart: always
+    ports:
+      - 8888:8888
+    user: root
+    environment:
+      - NB_UID=$HOST_UID
+      - NB_GID=$HOST_GID
+    volumes:
+      - ./:/home/jovyan/work
+    command: ["start.sh", "jupyter", "lab", "--NotebookApp.token=''"]

@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+
+  jupyter:
+    container_name: spark
+    image: jupyter/pyspark-notebook:spark-3.2.1
+    restart: always
+    ports:
+      - 8888:8888
+      - 4040:4040
+    user: root
+    volumes:
+      - ./:/home/jovyan/work
+    command: ["start.sh", "jupyter", "lab", "--NotebookApp.token=''"]
+

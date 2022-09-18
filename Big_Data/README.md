@@ -1,4 +1,4 @@
-# Big Data @ ETH Zurich (Fall 2021)
+# Big Data @ ETH Zurich (Fall 2022)
 
 This repository hosts the weekly exercise sheets of the [Big Data course](https://systems.ethz.ch/education/courses/2021-autumn/big-data.html) at ETH Zurich.
 

@@ -1,4 +1,4 @@
-FROM postgres:13.4-buster
+FROM postgres:14.5
 MAINTAINER Ingo Müller <ingo.mueller@inf.ethz.ch>
 
 # Depdencies for importing data

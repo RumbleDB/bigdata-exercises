@@ -35,14 +35,13 @@ def run_sample():
         # TODO: replace AccountName and AccountKey with your own credentials
         connection_string = "DefaultEndpointsProtocol=https;AccountName=xxxx;AccountKey=xxxx;EndpointSuffix=core.windows.net"
 
-        # Note can test the following code with a dummy test file, then try to upload a larger dataset. 
-        # It can take a while to upload git-archive-huge.json
-        blob = BlobClient.from_connection_string(conn_str=connection_string, container_name="newcontainer", blob_name="git-archive-huge")
-        # TODO: Note that you cannot name "blob_name" with json extension. But you can rename it on Azure storage once the uploading is finished. 
+        # Note can test the following code with the smallest, then try to upload a larger dataset. 
+        # It can take quite a while to upload git-archive-huge.json
+        blob = BlobClient.from_connection_string(conn_str=connection_string, container_name="newcontainer", blob_name="git-archive-huge.json")
 
         print('starting to upload')
         with open("git-archive-huge.json", "rb") as data:
-            blob.upload_blob(data)
+            blob.upload_blob(data, overwrite=True)
         
         print('finished uploading')
 

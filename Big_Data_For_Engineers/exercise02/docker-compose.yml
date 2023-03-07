@@ -1,17 +1,25 @@
 version: '3.1'
 
 services:
-
+  
+  minio:
+    container_name: Minio
+    command: server /data --console-address ":9001"
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=supersecret
+    image: quay.io/minio/minio:latest
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    restart: unless-stopped
+  
   jupyter:
     image: jupyter/minimal-notebook
     restart: always
     ports:
       - 8888:8888
     user: root
-    environment:
-      - NB_UID=$HOST_UID
-      - NB_GID=$HOST_GID
     volumes:
-      - ./:/home/jovyan/work
+        - ./:/home/jovyan/work
     command: ["start.sh", "jupyter", "lab", "--NotebookApp.token=''"]
-

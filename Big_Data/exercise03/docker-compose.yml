@@ -3,6 +3,7 @@ version: "3"
 services:
   namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    platform: "linux/amd64"
     container_name: namenode
     restart: always
     ports:
@@ -17,6 +18,7 @@ services:
 
   datanode:
     image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    platform: "linux/amd64"
     container_name: datanode
     restart: always
     ports:
@@ -30,6 +32,7 @@ services:
   
   resourcemanager:
     image: bde2020/hadoop-resourcemanager:2.0.0-hadoop3.2.1-java8
+    platform: "linux/amd64"
     container_name: resourcemanager
     restart: always
     environment:
@@ -39,6 +42,7 @@ services:
 
   nodemanager1:
     image: bde2020/hadoop-nodemanager:2.0.0-hadoop3.2.1-java8
+    platform: "linux/amd64"
     container_name: nodemanager
     restart: always
     environment:
@@ -48,6 +52,7 @@ services:
   
   historyserver:
     image: bde2020/hadoop-historyserver:2.0.0-hadoop3.2.1-java8
+    platform: "linux/amd64"
     container_name: historyserver
     restart: always
     environment:
@@ -66,7 +71,7 @@ services:
       - 8888:8888
     user: root
     volumes:
-      - ./:/home/jovyan/work
+      - ./:/home/jovyan
     command: ["start.sh", "jupyter", "lab", "--NotebookApp.token=''"]
   
 volumes:

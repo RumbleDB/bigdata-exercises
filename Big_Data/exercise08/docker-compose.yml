@@ -1,8 +1,9 @@
 version: '3'
 services:
-  jupyter:                                                               
+  jupyter:
     container_name: jupyter
-    image: jupyter/pyspark-notebook:spark-3.1.1 
+    image: jupyter/pyspark-notebook:spark-3.1.1
+    platform: linux/amd64
     restart: always
     ports:
       - 8888:8888

@@ -1,0 +1,21 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+  jupyter:
+    build: ./jupyter_docker
+    volumes:
+      - ./:/home
+    ports:
+      - 8888:8888
+    working_dir: /home
+
+  rumble:
+    build: ./rumble_docker
+    volumes:
+      - ./:/home
+    ports:
+      - 9090:9090
+    working_dir: /home
+

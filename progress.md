@@ -12,6 +12,19 @@ progress.md (END)
 ## exercise 
  enviromemnt set up
 
+## docker 
+https://docs.google.com/document/d/17HJ9-ljkLxP_HdkZKHjpj4BH67jBDIzxaU0EKciUkS8/edit?pli=1#heading=h.cilq0rusrnzq
+basic usuage for this repository, check readme file 
+
+## exercise 
+the problem for course 2021 is that some materail seems not avaiable anymore , try course 2023 instead 
+ enviromemnt set up
+
+Basic Usage
+Check out this repository using git. In the folder of a particular exercise (that contains a docker-compose.yml file), run the following command in a terminal:
+docker-compose up
+
+In most if not all weeks, one of the services is a Jupyter notebook server with which you can use the exercise notebooks interactively. You can access the server by accessing http://localhost:8888 in your favorite browser.
 
 # 2023_12_13 lessons learnt:  SQL 
 this is basicl database knowledge (SQL)

@@ -1,4 +1,4 @@
-# Big Data For Engineer @ ETH Zurich (Spring 2023)
+# Big Data For Engineer @ ETH Zurich (Spring 2024)
 
 This repository hosts the weekly exercise sheets of the [Big Data course](https://systems.ethz.ch/education/courses/2022-spring/big-data-for-engineers.html) at ETH Zurich.
 
@@ -35,7 +35,7 @@ In most if not all weeks, one of the services is a Jupyter notebook server with 
 
 Accessing the host folder that is mounted into the containers may not immediately work due to permissions. In that case, use the following procedure:
 
-1. In the root folder of this repository run:
+1. In this directory, run:
    ```bash
    ./init-docker-env.sh
    ```

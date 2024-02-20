@@ -14,12 +14,12 @@ The exercises sheets heavily rely on [Docker Compose](https://docs.docker.com/co
 
 ### Basic Usage
 
-Check out this repository using git. In the folder of a particular exercise (that contains a `docker-compose.yml` file), run the following command in a terminal:
-
+Most exercises will use the Exam Magic Box Docker environment. You can find the
+download link in Moodle. After unzipping, open a terminal and go to
+the `exam-docker` directory containing the `docker-compose.yml` and run
 ```bash
 docker-compose up
 ```
-
 This outputs the log of the various services that are started in different docker containers. Check this output in case something goes wrong. To stop the services, press Ctrl+C. You can also start the services in the background and stop them with an explicit command:
 
 ```bash
@@ -28,7 +28,15 @@ docker-compose stop   # Stops the services but leaves the containers
 docker-compose down   # Stops the services if running and removes the containers
 ```
 
-In most if not all weeks, one of the services is a Jupyter notebook server with which you can use the exercise notebooks interactively. You can access the server by accessing [http://localhost:8888](http://localhost:8888) in your favorite browser. The exercise folder is automatically mounted into the container of the Jupyter notebook server such that you can open the notebooks we provide right away. Changes you make in the server are reflected immediately on your disk, so even if you destroy the containers, they are still there.
+In most if not all weeks, one of the services is a Jupyter notebook server with
+which you can use the exercise notebooks interactively. You can access the
+server by accessing [http://localhost:8888](http://localhost:8888) in your
+favorite browser. The `notebooks` folder in the Magic Box is automatically mounted into the
+container of the Jupyter notebook server.
+To start with an exercise, copy the Jupyter `*.ipynb` files from the directory
+here into the `notebooks/` folder and find it in Jupyter at [http://localhost:8888](http://localhost:8888).
+Changes you make in the server are reflected immediately on
+your disk, so even if you destroy the containers, they are still there.
 
 
 ### Permissions to Host Folder

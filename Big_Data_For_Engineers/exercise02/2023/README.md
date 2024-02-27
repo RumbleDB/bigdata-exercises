@@ -1,1 +1,0 @@
-Old version with MinIO

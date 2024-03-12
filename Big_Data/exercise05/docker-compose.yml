@@ -28,7 +28,7 @@ services:
     container_name: jupyter
     build:
       context: ./HBase/jupyter-notebook
-    restart: always
+    restart: no
     ports:
       - 8888:8888
     user: root

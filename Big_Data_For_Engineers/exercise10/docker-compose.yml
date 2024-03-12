@@ -6,10 +6,10 @@ services:
   mongo:
     image: mongo
     container_name: mongo
-    restart: always
+    restart: no
 
   mongo-express:
     image: mongo-express
-    restart: always
+    restart: no
     ports:
       - 8081:8081

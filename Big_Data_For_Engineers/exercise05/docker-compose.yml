@@ -20,3 +20,15 @@ services:
     image: blueskyareahm/hbase-zookeeper:3.4.13
     ports:
       - 2181:2181
+
+  jupyter:                                                                                                                                                                                                
+    container_name: ex05-jupyter
+    build:
+      context: ./docker-hadoop/jupyter
+    restart: always
+    ports:
+      - 8888:8888
+    user: root
+    volumes:
+      - ./:/home/jovyan
+    command: ["start.sh", "jupyter", "notebook", "--NotebookApp.token=''"]

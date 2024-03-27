@@ -1,4 +1,4 @@
-version: '2'
+version: "2"
 
 services:
   hbase-master:
@@ -21,11 +21,11 @@ services:
     ports:
       - 2181:2181
 
-  jupyter:                                                                                                                                                                                                
+  jupyter:
     container_name: ex05-jupyter
     build:
-      context: ./docker-hadoop/jupyter
-    restart: always
+      context: ./jupyter
+    restart: no
     ports:
       - 8888:8888
     user: root

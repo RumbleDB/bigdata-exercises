@@ -10,7 +10,7 @@ word = None
 
 for line in sys.stdin:
     line = line.strip()
-    word, count = line.split('\t', 1)
+    word, count = line.split("\t", 1)
     try:
         count = int(count)
     except ValueError:
@@ -20,9 +20,9 @@ for line in sys.stdin:
         current_count += count
     else:
         if current_word:
-            print('%s\t%s' % (current_word, current_count))
+            print(current_word, current_count, sep="\t")
         current_count = count
         current_word = word
 
-if current_word == word:
-    print('%s\t%s' % (current_word, current_count))
+if current_word:
+    print(current_word, current_count, sep="\t")

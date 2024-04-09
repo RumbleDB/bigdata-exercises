@@ -5,9 +5,9 @@ import sys
 import re
 
 for line in sys.stdin:
-    # Set to lowercase, remove punctuations and tokenize
+    # Set to lowercase, remove punctuation, and tokenize
     line = line.lower().strip()
     line = re.sub(r"[^\w\s]", "", line)
     words = line.split()
     for word in words:
-        print('%s\t%s' % (word, 1))
+        print(word, 1, sep="\t")

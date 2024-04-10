@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  namenode:
+    image: bde2023/hadoop-namenode-aarch64:2.0.0-hadoop3.3.5-java11
+    container_name: namenode
+    restart: no
+    ports:
+      - 9870:9870
+      - 9000:9000
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=2.0.0-hadoop3.3.5-java11
+      - ROLLING_UPGRADE=started
+    env_file:
+      - ./hadoop.env
+
+  datanode:
+    image: bde2023/hadoop-datanode-aarch64:2.0.0-hadoop3.3.5-java11
+    container_name: datanode
+    restart: no
+    ports:
+      - 9864:9864
+    volumes:
+      - hadoop_datanode:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+    env_file:
+      - ./hadoop.env      
+      
+  resourcemanager:
+    image: bde2023/hadoop-resourcemanager-aarch64:2.0.0-hadoop3.3.5-java11
+    container_name: resourcemanager
+    restart: no
+    environment:
+      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864"
+    env_file:
+      - ./hadoop.env
+
+  nodemanager1:
+    image: bde2023/hadoop-nodemanager-aarch64:2.0.0-hadoop3.3.5-java11
+    container_name: nodemanager1
+    restart: no
+    environment:
+      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864 resourcemanager:8088"
+    env_file:
+      - ./hadoop.env
+  
+  historyserver:
+    image: bde2023/hadoop-historyserver-aarch64:2.0.0-hadoop3.3.5-java11
+    container_name: historyserver
+    restart: no
+    environment:
+      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864 resourcemanager:8088"
+    volumes:
+      - hadoop_historyserver:/hadoop/yarn/timeline
+    env_file:
+      - ./hadoop.env
+
+  jupyter:
+    container_name: jupyter
+    build:
+      context: ./docker-hadoop/jupyter
+    restart: no
+    ports:
+      - 8888:8888
+    user: root
+    volumes:
+      - ./:/home/jovyan/work
+    command: ["start.sh", "jupyter", "lab", "--NotebookApp.token=''"]      
+      
+volumes:
+  hadoop_namenode:
+  hadoop_datanode:
+  hadoop_historyserver:    

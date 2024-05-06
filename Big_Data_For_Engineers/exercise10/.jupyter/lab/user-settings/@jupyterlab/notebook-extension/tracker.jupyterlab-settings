@@ -1,0 +1,66 @@
+{
+    // Notebook
+    // @jupyterlab/notebook-extension:tracker
+    // Notebook settings.
+    // **************************************
+
+    // Code Cell Configuration
+    // The configuration for all code cells.
+    "codeCellConfig": {
+        "autoClosingBrackets": true,
+        "cursorBlinkRate": 530,
+        "fontFamily": null,
+        "fontSize": null,
+        "lineHeight": null,
+        "lineNumbers": false,
+        "lineWrap": "off",
+        "matchBrackets": true,
+        "readOnly": false,
+        "insertSpaces": true,
+        "tabSize": 4,
+        "wordWrapColumn": 80,
+        "rulers": [],
+        "codeFolding": false,
+        "lineWiseCopyCut": true
+    },
+
+    // Markdown Cell Configuration
+    // The configuration for all markdown cells.
+    "markdownCellConfig": {
+        "autoClosingBrackets": true,
+        "cursorBlinkRate": 530,
+        "fontFamily": null,
+        "fontSize": null,
+        "lineHeight": null,
+        "lineNumbers": false,
+        "lineWrap": "on",
+        "matchBrackets": false,
+        "readOnly": false,
+        "insertSpaces": true,
+        "tabSize": 4,
+        "wordWrapColumn": 80,
+        "rulers": [],
+        "codeFolding": false,
+        "lineWiseCopyCut": true
+    },
+
+    // Raw Cell Configuration
+    // The configuration for all raw cells.
+    "rawCellConfig": {
+        "autoClosingBrackets": true,
+        "cursorBlinkRate": 530,
+        "fontFamily": null,
+        "fontSize": null,
+        "lineHeight": null,
+        "lineNumbers": false,
+        "lineWrap": "on",
+        "matchBrackets": false,
+        "readOnly": false,
+        "insertSpaces": true,
+        "tabSize": 4,
+        "wordWrapColumn": 80,
+        "rulers": [],
+        "codeFolding": false,
+        "lineWiseCopyCut": true
+    }
+}

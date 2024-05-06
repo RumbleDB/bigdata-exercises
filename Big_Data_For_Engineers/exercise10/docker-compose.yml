@@ -13,3 +13,15 @@ services:
     restart: no
     ports:
       - 8081:8081
+
+  jupyter:
+    container_name: jupyter10
+    build:
+      context: ./jupyter
+    restart: no
+    ports:
+      - 8888:8888
+    user: root
+    volumes:
+      - ./:/home/jovyan
+    command: ["start.sh", "jupyter", "lab", "--NotebookApp.token=''"]

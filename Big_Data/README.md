@@ -1,6 +1,6 @@
-# Big Data @ ETH Zurich (Fall 2022)
+# Big Data @ ETH Zurich (Fall 2024)
 
-This repository hosts the weekly exercise sheets of the [Big Data course](https://systems.ethz.ch/education/courses/2021-autumn/big-data.html) at ETH Zurich.
+This repository hosts the weekly exercise sheets of the Big Data course at ETH Zurich.
 
 ## Docker Compose
 
@@ -14,7 +14,9 @@ The exercises sheets heavily rely on [Docker Compose](https://docs.docker.com/co
 
 ### Basic Usage
 
-Check out this repository using git. In the folder of a particular exercise (that contains a `docker-compose.yml` file), run the following command in a terminal:
+Check out this repository using git. 
+
+In the folder of a particular exercise (that contains a `docker-compose.yml` file), run the following command in a terminal:
 
 ```bash
 docker-compose up

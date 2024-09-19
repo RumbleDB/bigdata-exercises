@@ -1,8 +1,0 @@
-apple
-banana
-canary melon
-grape
-lemon
-orange
-pineapple
-strawberry

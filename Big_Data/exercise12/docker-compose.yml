@@ -1,23 +1,20 @@
-version: "2"
+version: "3.2"
 
 services:
-
   jupyter:
     container_name: jupyter
     image: jupyter/base-notebook
-    restart: no
+    restart: always
     ports:
       - 8888:8888
-    user: root
     volumes:
-      - ./:/home/jovyan/work
+      - ./:/home/jovyan
     command: ["start.sh", "jupyter", "lab", "--NotebookApp.token=''"]
 
   neo4j:
     container_name: neo4j
-    image: neo4j:4.3
-    platform: linux/amd64
-    restart: no
+    image: neo4j:5.14
+    restart: always
     ports:
       - 7474:7474
       - 7687:7687

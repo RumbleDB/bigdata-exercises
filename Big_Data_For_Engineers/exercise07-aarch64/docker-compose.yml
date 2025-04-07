@@ -33,6 +33,8 @@ services:
     image: bde2023/hadoop-resourcemanager-aarch64:2.0.0-hadoop3.3.5-java11
     container_name: resourcemanager
     restart: no
+    ports:
+      - 8088:8088
     environment:
       SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode:9864"
     env_file:

@@ -1,6 +1,6 @@
 # Big Data For Engineer @ ETH Zurich (Spring 2025)
 
-This repository hosts the weekly exercise sheets of the [Big Data course](https://systems.ethz.ch/education/courses/2022-spring/big-data-for-engineers.html) at ETH Zurich.
+This repository hosts the weekly exercise sheets of the [Big Data course](https://systems.ethz.ch/education/courses/2025-spring/big-data-for-engineers.html) at ETH Zurich.
 
 ## Docker Compose
 
@@ -38,75 +38,43 @@ here into the `notebooks/` folder and find it in Jupyter at [http://localhost:88
 Changes you make in the server are reflected immediately on
 your disk, so even if you destroy the containers, they are still there.
 
+### RumbleDB Troubleshooting
 
-### Permissions to Host Folder
+If you encounter issues while using RumbleDB, here are some common troubleshooting steps you can follow:
 
-Accessing the host folder that is mounted into the containers may not immediately work due to permissions. In that case, use the following procedure:
+#### 1. ETHZ Proxy
 
-1. In this directory, run:
-   ```bash
-   ./init-docker-env.sh
-   ```
-   This creates an `.env` file in the same folder with the user and group IDs of your host user. You only need to do this once.
-1. After that, in every new terminal you use, run the following command:
-   ```bash
-   ./activate-docker-env.sh
-   ```
-   This changes the command `docker-compose` to automatically use the `.env` file from the previous step, which the docker containers use in turn to run their processes as your user from the host.
-1. When you are done, close your terminal or run:
-   ```bash
-   ./deactivate-docker-env.sh
-   ```
+Sometimes the ETHZ proxy, which is automatically set up when you connect to the network (either via VPN or Wi-Fi) can interfere with the Docker DNS service used to communicate with the RumbleDB container.
 
-### Working behind ETH's Proxy
+To bypass this, try adding the following code at the top of your notebook:
 
-If you are working within the ETH network (i.e., from within ETH's wifi, from one of the pool computers, or via VPN), you need to configure Docker in two places to work with that proxy. Below is a description how (adapted from [the official documentation](https://docs.docker.com/network/proxy/)).
+```python
+import os
 
-#### Docker Client
+proxy_url = ''
 
-Edit `~/.docker/config.json` and make sure the proxy is configured like this:
-
-```JSON
-{
- "proxies":
- {
-   "default":
-   {
-     "httpProxy": "http://proxy.ethz.ch:3128",
-     "httpsProxy": "http://proxy.ethz.ch:3128"
-   }
- }
-}
+os.environ['http_proxy'] = proxy_url
+os.environ['https_proxy'] = proxy_url
+os.environ['ftp_proxy'] = proxy_url
+os.environ['HTTP_PROXY'] = proxy_url
+os.environ['HTTPS_PROXY'] = proxy_url
+os.environ['FTP_PROXY'] = proxy_url
 ```
 
-#### Docker Engine
+**Note:** A typical error you might see when the RumbleDB connection fails due to this issue is:
 
-Inside the Docker containers (which are started by Docker Compose), the environment variables `http(s)_proxy` both upper and lower case should be set to `http://proxy.ethz.ch:3128`. There are a number of ways to achieve this:
+```
+JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+```
 
-* Modify the `.env` file in each `exerciseXX` directory or the one in the root directory if this repository and add the following lines:
-   ```bash
-   HTTPS_PROXY=http://proxy.ethz.ch:3128
-   HTTP_PROXY=http://proxy.ethz.ch:3128
-   FTP_PROXY=http://proxy.ethz.ch:3128
-   https_proxy=http://proxy.ethz.ch:3128
-   http_proxy=http://proxy.ethz.ch:3128
-   ftp_proxy=http://proxy.ethz.ch:3128
-   ```
-* If you know your system is using systemd (which is the default in Ubuntu), try out [this method](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy) to configure these variables permanently.
-* If you know your system is using SysV (e.g., some older Ubuntu/Debian versions), try out [this method](https://stackoverflow.com/a/38386911/651937)
+#### 2. Conflict with the Docker Engine
 
-### SSH Tunnel
+We’ve observed that certain versions of the Docker Engine (for example, **27.5.1**) combined with Docker Desktop (for example, **4.38**) can cause issues with the operating system’s cgroups on macOS or Linux, which in turn interferes with RumbleDB.
 
-You may want to run Docker Compose on some computer (maybe from the ETH pool) but use a browser on another one (maybe your laptop at home). This is possible with SSH tunneling.
+To fix this, update to the **latest version** of Docker Engine and Docker Desktop.
 
-With that approach, there are two to three computers involved: (1) your machine (with the browser), (2) a *jump host*, and (3) the target machine (where Docker Compose runs). It may be that (2) and (3) are the same computer. For this to work, you will need an SSH client on your machine (1), you need to be able to SSH from your machine (1) to the jump host (2), the jump host (2) needs to be able to reach the target machine (3) over the network, and Docker Compose needs to be installed as described above on the target machine (3).
+**Note:** A typical error message related to this issue is:
 
-Once everything is installed, do the following to establish the tunnel:
-
-```bash
-ssh -L $LOCAL_PORT:$TARGET_MACHINE_DNSNAME:$TARGET_PORT -p $SSH_PORT $SSH_USER@$JUMPHOST_DNSNAME
- ```
-
-For the notebook server, `TARGET_PORT=8888`. You typically set `LOCAL_PORT` to the same value or to `80`, in which case you can omit the port from the URL in your local browser. `SSH_PORT` is 22 by default; `SSH_USER` is probably your NETHZ ID if the target machine (3) is managed by ETH. If the target machine (3) is the same machine as the jump host (2), then `TARGET_MACHINE_DNSNAME=localhost`.
-
-If a `docker-compose.yml` exposes more than one service with a web server, you can repeat the `-L $LOCAL_PORT:$TARGET_MACHINE_DNSNAME:$TARGET_PORT` with different values of `LOCAL_PORT` and `TARGET_PORT`.
+```
+ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+```

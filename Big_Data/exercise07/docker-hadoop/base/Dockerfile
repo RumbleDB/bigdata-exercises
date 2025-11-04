@@ -1,29 +1,38 @@
-FROM debian:9
+FROM ubuntu:24.04
 
-MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
-MAINTAINER Giannis Mouchakis <gmouchakis@iit.demokritos.gr>
+LABEL maintainer="Tianxin Tang <titian.tang@gmail.com>"
+LABEL maintainer="Ivan Ermilov <ivan.s.ermilov@gmail.com>"
+LABEL maintainer="Giannis Mouchakis <gmouchakis@iit.demokritos.gr>"
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-      openjdk-8-jdk \
-      net-tools \
-      curl \
-      netcat \
-      gnupg \
-      libsnappy-dev \
+    openjdk-11-jdk \
+    net-tools \
+    curl \
+    gnupg \
+    netcat-traditional \
+    libsnappy-dev \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-      
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
 RUN curl -O https://dist.apache.org/repos/dist/release/hadoop/common/KEYS
 
 RUN gpg --import KEYS
 
-ENV HADOOP_VERSION 3.2.1
-ENV HADOOP_URL https://www.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
+# Note: for some reason, the version 3.4.1 and 3.4.2 does not have ARM64 builds
+ENV HADOOP_VERSION=3.4.0
+
+ARG TARGETARCH
 
 RUN set -x \
-    && curl -fSL "$HADOOP_URL" -o /tmp/hadoop.tar.gz \
-    && curl -fSL "$HADOOP_URL.asc" -o /tmp/hadoop.tar.gz.asc \
+    && case "${TARGETARCH}" in \
+         arm64|aarch64) HADOOP_ARCH="aarch64" ;; \
+         *) HADOOP_ARCH="" ;; \
+       esac \
+       
+    && HADOOP_URL="https://www.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}${HADOOP_ARCH:+-${HADOOP_ARCH}}.tar.gz" \
+    && echo "Downloading Hadoop from $HADOOP_URL" \
+    && curl -kfSL "$HADOOP_URL" -o /tmp/hadoop.tar.gz \
+    && curl -kfSL "$HADOOP_URL.asc" -o /tmp/hadoop.tar.gz.asc \
     && gpg --verify /tmp/hadoop.tar.gz.asc \
     && tar -xvf /tmp/hadoop.tar.gz -C /opt/ \
     && rm /tmp/hadoop.tar.gz*
@@ -35,10 +44,11 @@ RUN mkdir /opt/hadoop-$HADOOP_VERSION/logs
 RUN mkdir /hadoop-data
 
 ENV HADOOP_HOME=/opt/hadoop-$HADOOP_VERSION
+ENV YARN_HOME=$HADOOP_HOME
 ENV HADOOP_CONF_DIR=/etc/hadoop
 ENV MULTIHOMED_NETWORK=1
 ENV USER=root
-ENV PATH $HADOOP_HOME/bin/:$PATH
+ENV PATH=$HADOOP_HOME/bin/:$PATH
 
 ADD entrypoint.sh /entrypoint.sh
 

@@ -1,5 +1,5 @@
 FROM jupyter/scipy-notebook:2021-09-13
-MAINTAINER Ingo Müller <ingo.mueller@inf.ethz.ch>
+LABEL maintainer="Ingo Müller <ingo.mueller@inf.ethz.ch>"
 
 USER root
 

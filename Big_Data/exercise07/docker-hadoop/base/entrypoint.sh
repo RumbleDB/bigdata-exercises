@@ -1,5 +1,12 @@
 #!/bin/bash
 
+export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
+
+echo "Using JAVA_HOME=$JAVA_HOME"
+
+# Persist JAVA_HOME in environment in bashrc
+echo "export JAVA_HOME=$JAVA_HOME" >> /etc/bash.bashrc
+
 # Set some sensible defaults
 export CORE_CONF_fs_defaultFS=${CORE_CONF_fs_defaultFS:-hdfs://`hostname -f`:8020}
 

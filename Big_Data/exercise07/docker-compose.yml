@@ -63,8 +63,7 @@ services:
 
   jupyter:
     container_name: jupyter
-    build:
-      context: ./docker-hadoop/jupyter
+    image: quay.io/jupyter/scipy-notebook:2025-11-03
     restart: always
     ports:
       - 8888:8888

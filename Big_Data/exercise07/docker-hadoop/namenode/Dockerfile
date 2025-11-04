@@ -1,6 +1,6 @@
-FROM bde2020/hadoop-base:2.0.0-hadoop3.2.1-java8
+FROM exercise07-hadoop-base:latest
 
-MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
+LABEL maintainer="Tianxin Tang <titian.tang@gmail.com>"
 
 HEALTHCHECK CMD curl -f http://localhost:9870/ || exit 1
 
@@ -12,9 +12,11 @@ ADD run.sh /run.sh
 RUN chmod a+x /run.sh
 
 RUN apt-get update && \
-        apt-get install \
-        vim \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends vim && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN apt-get install vim
 
 EXPOSE 9870
 

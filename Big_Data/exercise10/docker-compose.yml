@@ -1,18 +1,19 @@
-# Use root/example as user/password credentials
-version: '3.1'
-
 services:
 
   mongo:
     image: mongo
     container_name: mongo
     restart: no
+    ports:
+      - "27017:27017"
 
   mongo-express:
     image: mongo-express
     restart: no
     ports:
       - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
 
   jupyter:
     container_name: jupyter10

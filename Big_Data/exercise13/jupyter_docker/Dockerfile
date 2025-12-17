@@ -1,4 +1,4 @@
-FROM python:3.9.18
+FROM python:3.13.7-bookworm
 # Apparently it is Debian 12 (Bookworm). This is important to know how to look up commands.
 # RUN apt update && apt install libpq-dev python3-dev gcc python3-pip -y 
 
@@ -19,14 +19,13 @@ RUN apt install temurin-8-jdk -y
 #RUN apt install -y zulu8-jdk
 
 RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install notebook==7.0.8 ipython-sql==0.5.0 psycopg2==2.9.9  
-RUN pip3 install pyspark==3.4.3
-RUN pip3 install findspark
-RUN pip3 install sparksql-magic
-RUN pip3 install rumbledb
-RUN pip3 install pandas
-RUN pip3 install matplotlib
-RUN jupyter notebook --generate-config
-RUN echo "c.NotebookApp.token = ''" >> $HOME/.jupyter/jupyter_notebook_config.py
-RUN echo "c.NotebookApp.password = u''" >> $HOME/.jupyter/jupyter_notebook_config.py
-CMD jupyter notebook --allow-root  --ip 0.0.0.0 --no-browser --port 8888
+
+WORKDIR /root
+
+COPY requirements.txt ./requirements.txt
+
+RUN pip3 install -r requirements.txt
+
+COPY jupyter_lab_config.py ./.jupyter/jupyter_notebook_config.py
+
+CMD jupyter lab --allow-root  --ip 0.0.0.0 --no-browser --port 8888

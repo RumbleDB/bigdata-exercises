@@ -18,8 +18,8 @@ services:
   jupyter:
     build: ./jupyter_docker
     volumes:
-      - ./:/home
+      - ./:/home/jupyter
     ports:
       - 8888:8888
-    working_dir: /home
     restart: always
+

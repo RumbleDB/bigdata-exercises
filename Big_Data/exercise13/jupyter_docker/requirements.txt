@@ -1,0 +1,13 @@
+jupyterlab==4.4.6
+jupysql==0.11.1
+psycopg2==2.9.11
+pyspark==4.0.1
+sparksql-magic==0.0.3
+findspark==2.0.1
+pandas==2.3.3
+jsoniq==2.0.8
+matplotlib==3.10.7
+pyarrow==21.0.0
+grpcio==1.74.0
+grpcio-status==1.74.0
+notebook

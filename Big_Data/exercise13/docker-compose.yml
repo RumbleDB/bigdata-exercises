@@ -21,5 +21,6 @@ services:
       - ./:/home/jupyter
     ports:
       - 8888:8888
+    working_dir: /home/jupyter
     restart: always
 

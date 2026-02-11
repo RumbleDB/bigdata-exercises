@@ -1,4 +1,4 @@
-# Big Data @ ETH Zurich (Fall 2024)
+# Big Data @ ETH Zurich (Fall 2025)
 
 This repository hosts the weekly exercise sheets of the Big Data course at ETH Zurich.
 

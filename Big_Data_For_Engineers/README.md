@@ -1,6 +1,6 @@
-# Big Data For Engineer @ ETH Zurich (Spring 2025)
+# Big Data For Engineer @ ETH Zurich (Spring 2026)
 
-This repository hosts the weekly exercise sheets of the [Big Data course](https://systems.ethz.ch/education/courses/2025-spring/big-data-for-engineers.html) at ETH Zurich.
+This repository hosts the weekly exercise sheets of the Big Data for Engineers course at ETH Zurich.
 
 ## Docker Compose
 

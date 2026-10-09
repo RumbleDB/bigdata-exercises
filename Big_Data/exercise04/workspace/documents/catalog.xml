@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="http://example.org/catalog"
+    xmlns:bk="http://example.org/book"
+    xmlns:pub="http://example.org/publisher">
+    <book id="b1" pub:year="1949">
+        <bk:title>1984</bk:title>
+        <author>George Orwell</author>
+    </book>
+    <book id="b2" pub:year="1937">
+        <bk:title>The Hobbit</bk:title>
+        <author>J. R. R. Tolkien</author>
+    </book>
+    <book id="b3" pub:year="1960">
+        <bk:title>To Kill a Mockingbird</bk:title>
+        <author>Harper Lee</author>
+    </book>
+    <bk:magazine issue="42">
+        <title>Science Weekly</title>
+        <pub:editor>Jane Doe</pub:editor>
+    </bk:magazine>
+    <publisher xmlns="http://example.org/publisher" code="p1">
+        <name>Generic Press</name>
+    </publisher>
+</catalog>

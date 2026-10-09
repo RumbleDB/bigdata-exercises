@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE catalog>
+<catalog>
+    <!-- Start book list --to be defined -->
+   <Book id=`bk101`>
+      <author>Gambardella, Matthew</author>
+      <title>XML Developer's Guide</title>
+      <genre>Computer</genre>
+      <price>44.95€</price>
+      <publish_date version='hard' version='soft'>2000-10-01</publish_date>
+      <_description lang=en>An `in-depth look` at creating applications 
+      with XML <for dummies>.</_description>
+      <xml_parse>true</xml_parse>
+   </book>
+</>

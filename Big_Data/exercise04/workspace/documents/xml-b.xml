@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<h:library xmlns:xdc="http://www.xml.com/books" xmlns:h="http://xml.com/library">
+    <head><h:title>Book Review</title></head>
+    <body/>
+        <_xdc:bookreview>
+            <xdc:title>XML: A Primer</xdc:title>
+            <_table _style='container'>
+                <h:tr align="#center">
+                    <h:td>Author<h:span>St. Laurent & Tom Faron</h:td></h:span>
+                </h:tr>
+                <h:tr align="#left">
+                    <h:td><xdc:author>Simon St. Laurent</xdc:author></h:td>
+                    <h:td><xdc:price>31.98</xdc:price></h:td>
+                    <h:td><xdc:#pages>352</xdc:#pages></h:td>
+                    <h:td><xdc:_date>1998/01</xdc:_date></h:td>
+                    <h:td><xdc:-comment>Love it</xdc:-comment></h:td>
+                </h:tr>
+            </_table>
+        </_xdc:bookreview>
+    </body>
+</h:library>

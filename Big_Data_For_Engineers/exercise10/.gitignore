@@ -1,0 +1,8 @@
+primer-dataset.json
+.cache/*
+.ipython/*
+.ivy*
+.local/*
+.mongodb/*
+.jupyter/*
+.npm/*

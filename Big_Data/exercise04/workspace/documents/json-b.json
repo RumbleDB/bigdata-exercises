@@ -1,0 +1,25 @@
+[
+    1: {
+      "name": 'John'
+      "lastname": 'Smith',
+      "account": "jsmith"
+      "phonenumbers" [{
+           "type": "home",
+           "1phone": 212-3242,
+           "2phone": "545-4568"
+       }]
+    },
+    2: {
+      "name": "Jane"
+      "lastname": 'Doe',
+      "account": "jdoe"
+      "phonenumbers" [
+      {
+           "type": "home",
+           "phone": "8989 7685"
+      },
+      "phone": "545-4568"
+      ],
+      "account": "janedoe"
+    }
+]

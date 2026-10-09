@@ -1,0 +1,29 @@
+# TODO: merge with docker-compose.yml or add instruction to use this file
+
+version: "2"
+
+services:
+  hbase-master:
+    image: satoshiyamamoto/hbase:2.1
+    restart: no 
+    environment:
+      - PATH=/usr/local/openjdk-8/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/hbase/bin/
+    ports:
+      - 8080:8080
+      - 8085:8085
+      - 9090:9090
+      - 9095:9095
+      - 2181:2181
+      - 16010:16010
+
+  jupyter:
+    container_name: ex05-jupyter
+    build:
+      context: ./jupyter
+    restart: no
+    ports:
+      - 8888:8888
+    user: root
+    volumes:
+      - ./:/home/jovyan
+    command: ["start.sh", "jupyter", "notebook", "--NotebookApp.token=''"]

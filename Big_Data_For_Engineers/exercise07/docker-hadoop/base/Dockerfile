@@ -28,6 +28,7 @@ RUN set -x \
          arm64|aarch64) HADOOP_ARCH="aarch64" ;; \
          *) HADOOP_ARCH="" ;; \
        esac \
+       
     && HADOOP_URL="https://www.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}${HADOOP_ARCH:+-${HADOOP_ARCH}}.tar.gz" \
     && echo "Downloading Hadoop from $HADOOP_URL" \
     && curl -kfSL "$HADOOP_URL" -o /tmp/hadoop.tar.gz \

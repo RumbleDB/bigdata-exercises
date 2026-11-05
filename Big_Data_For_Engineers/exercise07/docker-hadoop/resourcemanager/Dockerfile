@@ -1,4 +1,4 @@
-FROM local/exercise07-hadoop-base
+FROM exercise07-hadoop-base:latest
 
 LABEL maintainer="Ivan Ermilov <ivan.s.ermilov@gmail.com>"
 
